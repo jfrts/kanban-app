@@ -19,12 +19,13 @@ const router = createRouter({
         { path: "/boards", component: BoardsViewVue },
         { path: "/boards/:idBoard", component: BoardViewVue },
         { path: "/login", component: LoginViewVue },
+        { path: "/", redirect: "/login" },
     ]
 });
 
 const httpClient = new AxiosAdapter(router);
 
-const authService = new AuthServiceHttp("http://localhost:3001", httpClient);
+const authService = new AuthServiceHttp("https://app-branas-course.onrender.com", httpClient);
 
 const pinia = createPinia();
 pinia.use(({ store }) => {
