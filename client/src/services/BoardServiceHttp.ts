@@ -2,7 +2,7 @@ import { Board } from "../entities/Board";
 import { Card } from "../entities/Card";
 import { Column } from "../entities/Column";
 import { HttpClient } from "../infra/http/HttpClient";
-import { BoardService, ColumnInput, PositionMapInput, SaveCardInput } from "./BoardService";
+import { BoardService, ColumnInput, PositionMapInput, SaveCardInput, BoardInput, UpdateCardInput } from "./BoardService";
 
 export class BoardServiceHttp implements BoardService {
     constructor(readonly baseUrl: string, readonly httpClient: HttpClient) {
@@ -33,6 +33,11 @@ export class BoardServiceHttp implements BoardService {
         return board;
     }
 
+    async saveBoard(board: BoardInput): Promise<number> {
+		const idBoard = await this.httpClient.post(`${this.baseUrl}/boards`, board);
+		return idBoard;
+	}
+
     async saveColumn(column: ColumnInput): Promise<number> {
         const response = await this.httpClient.post(
             `${this.baseUrl}/boards/${column.idBoard}/columns`,
@@ -50,6 +55,10 @@ export class BoardServiceHttp implements BoardService {
     async saveCard(card: SaveCardInput): Promise<number> {
 		const idCard = await this.httpClient.post(`${this.baseUrl}/boards/${card.idBoard}/columns/${card.idColumn}/cards`, card);
 		return idCard;
+	}
+
+    async updateCard(card: UpdateCardInput): Promise<void> {
+		await this.httpClient.put(`${this.baseUrl}/boards/${card.idBoard}/columns/${card.idColumn}/cards/${card.idCard}`, card);
 	}
 
     async deleteCard(idBoard: number, idColumn: number, idCard: number): Promise<void> {

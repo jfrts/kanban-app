@@ -10,6 +10,7 @@
     "test": "vitest --dom"
   },
   "dependencies": {
+    "@types/vue": "^2.0.0",
     "@vue/test-utils": "^2.4.0",
     "axios": "^1.4.0",
     "happy-dom": "^9.20.3",

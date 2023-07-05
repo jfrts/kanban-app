@@ -2,8 +2,9 @@ import { Board } from "../entities/Board";
 
 export interface BoardService {
     getBoard(idBoard: number): Promise<Board>;
-    saveBoard(board: SaveBoardInput): Promise<number>;
-    saveColumn(column: SaveColumnInput): Promise<number>;
+    getBoards(): Promise<Board[]>;
+    saveBoard(board: BoardInput): Promise<number>;
+    saveColumn(column: ColumnInput): Promise<number>;
     deleteColumn(idBoard: number, idColumn: number): Promise<void>;
     saveCard(card: SaveCardInput): Promise<number>;
     deleteCard(idBoard: number, idColumn: number, idCard: number): Promise<void>;
@@ -11,11 +12,11 @@ export interface BoardService {
     updatePositionMap(input: { idBoard: number, positionMap: { [idColumn: number]: number[] } }): Promise<void>;
 }
 
-export type SaveBoardInput = {
+export type BoardInput = {
     name: string
 }
 
-export type SaveColumnInput = {
+export type ColumnInput = {
     idBoard: number,
     name: string,
     hasEstimative: boolean
@@ -34,4 +35,9 @@ export type UpdateCardInput = {
     idCard: number,
     title: string,
     estimative: number
+}
+
+export type PositionMapInput = { 
+    idBoard: number; 
+    positionMap: { [idColumn: number]: number[]; }; 
 }

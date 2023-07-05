@@ -1,10 +1,10 @@
 import { mount } from "@vue/test-utils";
 import { Board } from "../src/entities/Board";
-import { BoardService, SaveColumnInput } from "../src/services/BoardService";
+import { BoardService, ColumnInput } from "../src/services/BoardService";
 import BoardViewVue from "../src/views/BoardView.vue";
 
 function sleep (ms: number) {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		setTimeout(() => {
 			resolve(true);
 		}, ms);
@@ -12,7 +12,9 @@ function sleep (ms: number) {
 }
 
 test.skip("Deve testar o board view", async function () {
+	// @ts-ignore
 	const boardService: BoardService = {
+		// @ts-ignore
 		async getBoard(idBoard: number) {
 			const board = new Board(1, "Projeto 1");
 			board.addColumn("Todo", true);
@@ -23,7 +25,8 @@ test.skip("Deve testar o board view", async function () {
 			board.addCard("Todo", "Atividade 3", 1);
 			return board;
 		},
-		async saveColumn (column: SaveColumnInput): Promise<number> {
+		// @ts-ignore
+		async saveColumn (column: ColumnInput): Promise<number> {
 			return 1;
 		}
 	}
