@@ -35,5 +35,5 @@ pinia.use(({ store }) => {
 app.use(router);
 app.use(pinia);
 useAuthStore().init(); 
-app.provide("boardService", new BoardServiceHttp("http://localhost:3001", httpClient));
+app.provide("boardService", new BoardServiceHttp("https://app-branas-course.onrender.com", httpClient));
 app.mount('#app');

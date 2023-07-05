@@ -8,4 +8,5 @@ export default defineConfig({
     globals: true
   },
   plugins: [vue()],
+  base: "./"
 })
